@@ -5,6 +5,13 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import connectDB from './mongodb/connect.js';
+
+import userRouter from '.routes/user.routes';
+
+import hospitalRouter from '.routes/hospital.routes';
+
+
+
 dotenv.config();
 
 
@@ -20,6 +27,12 @@ app.use(express.json( {limit:'50mb'}));
 app.get('/',(req,res)=>{
     res.send({message:'hello world'});
 })
+
+// now we will call our middleware
+
+app.use('api/v1/users',userRouter);
+
+app.use('api/v1/hospitals',hospitalRouter);
 
 
 const startServer = async()=>{
